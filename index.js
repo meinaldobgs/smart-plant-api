@@ -24,12 +24,13 @@ app.get('/plants', async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 });
+
 app.post('/sensor-data', async (req, res) => {
-    const { plant_id, temperature, air_humidity, soil_humidity } = req.body;
+    const { device_id, temperature, air_humidity, soil_humidity } = req.body;
     try {
         const result = await pool.query(
-            'INSERT INTO sensor_data (plant_id, temperature, air_humidity, soil_humidity) VALUES ($1, $2, $3, $4) RETURNING *',
-            [plant_id, temperature, air_humidity, soil_humidity]
+            'INSERT INTO sensor_data (device_id, temperature, air_humidity, soil_humidity) VALUES ($1, $2, $3, $4) RETURNING *',
+            [device_id, temperature, air_humidity, soil_humidity]
         );
         res.status(201).json({ message: "Data sensor berhasil direkam", data: result.rows[0] });
     } catch (err) {
