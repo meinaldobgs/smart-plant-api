@@ -38,5 +38,14 @@ app.post('/sensor-data', async (req, res) => {
         res.status(500).json({ error: "Gagal menyimpan data sensor" });
     }
 });
+app.get('/sensor-data', async (req, res) => {
+    try {
+        const result = await pool.query('SELECT * FROM sensor_data ORDER BY recorded_at DESC LIMIT 50');
+        res.status(200).json(result.rows);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Gagal mengambil riwayat sensor" });
+    }
+});
 
 app.listen(3001, () => console.log("🚀 Server jalan di port 3001"));
