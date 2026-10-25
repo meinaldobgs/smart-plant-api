@@ -5,7 +5,7 @@ const app = express();
 app.use(express.json());
 
 const pool = new Pool({
-    connectionString: "postgresql://postgres:SmartPlantUNS2026%21@db.zislsvsrnsiuhaasvlyt.supabase.co:5432/postgres",
+    connectionString: process.env.DATABASE_URL,
     ssl: { rejectUnauthorized: false }
 });
 
