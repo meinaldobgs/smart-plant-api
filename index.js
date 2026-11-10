@@ -108,6 +108,13 @@ app.delete('/plants/:id', async (req, res) => {
     }
 });
 
+app.get('/', (req, res) => {
+    res.status(200).json({
+        message: 'Smart Plant Monitoring API berjalan',
+        endpoints: ['/plants', '/sensor-data']
+    });
+});
+
 if (require.main === module) {
     app.listen(3001, () => console.log("🚀 Server jalan di port 3001"));
 }
